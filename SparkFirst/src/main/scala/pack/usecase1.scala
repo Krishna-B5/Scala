@@ -8,6 +8,8 @@ object usecase1 {
     println("====== Oroginal List =====")
     liststr.foreach(println)
     println
+    // converting to lowercase and checking for specific value
+    
     println("===== Filtering the india records =====")
     val filterdata = liststr.filter( x => x.toLowerCase().contains("india"))
     filterdata.foreach(println)
