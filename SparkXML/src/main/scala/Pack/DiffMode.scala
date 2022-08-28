@@ -4,7 +4,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SparkSession
 
-object XML1 {
+object DiffMode {
   
   def main(args: Array[String]){
     
@@ -18,14 +18,18 @@ object XML1 {
     val spark = SparkSession.builder().getOrCreate()
     import spark.implicits._
     
-    val xmldata = spark.read.format("XML")
-                  .option("rowTag", "book")
-                  .load("file:///c:/data/book.xml")
+    val df = spark.read.format("CSV")
+                 .load("file:///c:/data/datatxns.txt")
     
-    xmldata.show()
-    xmldata.printSchema()
+    df.show()
+    df.printSchema()
+    
+//    df.write.format("csv").save("file:///C:/data/mdata") 
+//    df.write.format("csv").mode("append").save("file:///C:/data/mdata") 
+//    df.write.format("csv").mode("overwrite").save("file:///C:/data/mdata")  
+    df.write.format("csv").mode("ignore").save("file:///C:/data/mdata") 
     
      println("===== Done =====")
-  }
- 
+  
+ }
 }
