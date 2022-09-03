@@ -14,7 +14,6 @@ object AWS_S3 {
     println("================Started============")
     println
     val conf = new SparkConf().setAppName("ES").setMaster("local[*]")
-
     val sc = new SparkContext(conf)
     sc.setLogLevel("ERROR")
 
