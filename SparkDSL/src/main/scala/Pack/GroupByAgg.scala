@@ -26,16 +26,18 @@ object GroupByAgg {
 
     println("====== Data Read ======\n")
     dtdf.show()
-    
+    // we are finding a sum of amount
     val finaldf = dtdf.groupBy(col("category"))
                       .agg(sum(col("amount")).as("total"))
                       .orderBy(col("category").desc)
                    
    finaldf.show()
-   
+   // we are finding how many times category is repeated
    val finaldf1 = dtdf.groupBy(col("category"))
                        .agg(count(col("category")).as("count"))
                        .orderBy(col("count"))
    finaldf1.show()
+   
+   println("===== Done ======")
   }
 }
