@@ -26,8 +26,8 @@ object cmjson {
     println("===== Flatting the data ======")
     val flatdf = jsondf.select("Technology",
     		                       "TrainerName",
-    		                       "address.permanent",
-    		                       "address.temporary",
+    		                       "address.*",
+//    		                       "address.temporary",
     		                        "id")
     flatdf.show()
     println("====== Schema ========")  
