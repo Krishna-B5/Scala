@@ -3,6 +3,8 @@ package Complex
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.functions._
 
 object cmjson {
   
@@ -24,11 +26,18 @@ object cmjson {
     jsondf.printSchema()
     
     println("===== Flatting the data ======")
-    val flatdf = jsondf.select("Technology",
-    		                       "TrainerName",
-    		                       "address.*",
-//    		                       "address.temporary",
-    		                        "id")
+//    val flatdf = jsondf.select("Technology",
+//    		                       "TrainerName",
+//    		                       "address.*",
+////    		                       "address.temporary",
+//    		                        "id")
+    
+    val flatdf = jsondf.select(col("Technology"),
+                               col("TrainerName"),
+                               col("address.*"),
+                               col("id")
+                               )
+    
     flatdf.show()
     println("====== Schema ========")  
     flatdf.printSchema()

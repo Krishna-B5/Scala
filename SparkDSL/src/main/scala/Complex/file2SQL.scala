@@ -46,10 +46,10 @@ object file2SQL {
     
     val flatdf = df11
                  .join(df2, df11("empnam") === df2("mno"), joinType = "inner" )
-                 .drop("empnam")
-                 .drop("mno")
-                 .groupBy("empno", "empman")
-                 .agg(collect_list("mname"))
+//                 .drop("empnam")
+//                 .drop("mno")
+//                 .groupBy("empno", "empman")
+//                 .agg(collect_list("mname"))
     
     flatdf.show()
     
