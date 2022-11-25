@@ -19,7 +19,8 @@ object obj {
 //   println("Concanted string: "+strcon)
     
     val strrep = liststr.map( x => x.replace("Zeyo", "Tera") )
-    println("Original string :"+liststr)    
+    println("Original string :"+liststr)   
+    println()
     println("Replaced string :"+strrep)
         
   }
