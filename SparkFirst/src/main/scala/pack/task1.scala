@@ -7,6 +7,7 @@ object task1 {
     println("===== List Operations =====")
     
     val liststr = List("Bigdata","spark","hive")
+    liststr.foreach(println)
     val mapstr = liststr.map( x => "zeyo," + x)
     mapstr.foreach(println)
     
