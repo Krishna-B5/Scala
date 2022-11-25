@@ -15,6 +15,7 @@ object task2 {
       println("===== Flatten 2 =====")
       val flatmap2= flatmap1.flatMap( x => x.split("->"))
       flatmap2.foreach(println)
+      println()
     
   }
 }
