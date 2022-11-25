@@ -15,5 +15,7 @@ object obj1 {
     val strflat = list1.flatMap( x => x.split("~") )
     
     println("Spearted string :"+strflat)
+    println()
+   
   }
 }
