@@ -27,17 +27,50 @@ object Array1 {
 	println("====== Schema ========")
 	jsondf.printSchema()
   
-	val flatdf = jsondf.select(col("Address.*"),
-//	                           col("address.Permanent address").as("Per"),
-//	                           col("address.current address").as("Cur"),
-	                           col("Mobile"),
-	                           col("Name"),
-	                           explode(col("Pets")).as("pet"),
-	                           col("status")  
-	                           )
+  
+//	val flatdf = jsondf.select(
+//	                           col("Address.Permanent address").as("Permament"),
+//	                           col("Address.current Address").as("Current"),
+//	                           col("Mobile"),
+//	                           col("Name"),
+//	                           explode(col("Pets").as("Pet")),
+//	                           col("status")                           
+//	                          )
+	
+	val flatdf = jsondf.withColumn("Per", col("Address.Permanent address"))
+	                   .withColumn("Cur", col("Address.current Address"))
+	                   .drop("Address")
+	                   .withColumn("Pet", explode(col("Pets")))
+	                   .drop("Pets")
+	                       
+	                   
 	println("===== DataFrame ======")           
 	flatdf.show()
 	println("====== Schema ========")
 	flatdf.printSchema()
+	
+	println("===== Reverse the flattend Data to complex data ======")
+	
+	val complexdata = flatdf.select(
+	                                struct(
+	                                col("Per").as("Permanent address"),
+	                                col("Cur").as("current Address")
+	                                ).as("Address"),
+	                                col("Mobile"),
+	                                col("Name"),
+	                                col("Pet"),
+	                                col("status")
+	                                )
+	                         .groupBy("Address","Mobile","Name","status")
+                           .agg(collect_list("Pet").as("Pets"))
+ complexdata.show()
+ complexdata.printSchema()
+ 
+// val complexdata1 = complexdata.groupBy("Address","Mobile","Name","status")
+//                               .agg(collect_list("Pet").as("Pets"))
+//                               
+// complexdata1.show()
+// complexdata1.printSchema()
+ 
   }
 }

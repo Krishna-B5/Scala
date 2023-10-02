@@ -31,7 +31,7 @@ object SimpleDSL {
     dtdf.show()
     
     println("====== Filtered data by AND ======\n")
-    val fildf = dtdf.filter(col("category") === "Gymnastics"
+    val fildf = dtdf.filter(col("category").contains("Gymnastics")
                             &&
                             col("spendby") === "cash")
     fildf.show()
@@ -56,6 +56,8 @@ object SimpleDSL {
     
     println("===== Not Null Values ======\n")
     val notdf = dtdf.filter(col("id").isNotNull)
+//    or
+//    val notdf = dtdf.filter( ! (col("id").isNUll))
     notdf.show()
    
     println("===== Done =====")

@@ -51,7 +51,7 @@ object Join {
     val fulldf = df1.join(df2, df1("txnno") === df2("tno"), "full")
                 .withColumn("txnno", expr("case when txnno is null then tno else txnno end"))
                 .drop(col("tno"))
-                .orderBy("txnno")
+//                .orderBy("txnno")
                 .show()
     println("====== Done =====\n")
  }

@@ -26,20 +26,39 @@ object cmjson {
     jsondf.printSchema()
     
     println("===== Flatting the data ======")
-//    val flatdf = jsondf.select("Technology",
-//    		                       "TrainerName",
-//    		                       "address.*",
-////    		                       "address.temporary",
-//    		                        "id")
     
-    val flatdf = jsondf.select(col("Technology"),
+    val flatdf = jsondf.select(
+                               col("Technology"),
                                col("TrainerName"),
-                               col("address.*"),
+                               col("address.permanent"),
+                               col("address.temporary"),
                                col("id")
-                               )
+                              )
+                              
+//    val flatdf = jsondf.withColumn("permanent", col("address.permanent"))
+////                     .withColumn("temporary", col("address.temporary"))
+//                      .drop("address")
+
     
     flatdf.show()
     println("====== Schema ========")  
     flatdf.printSchema()
+    
+    println("===== We can reverse it back to complex data =====")
+    
+    val complexdata = flatdf.select(
+                                    col("Technology"),
+                                    col("TrainerName"),
+                                    struct(
+                                          col("permanent"),
+                                          col("temporary")
+                                          ).as("address"),
+                                    col("id")
+                                    )
+   complexdata.show()
+   complexdata.printSchema() 
+                                    
+                                    
+    println("====== Done ========")
   }
 }

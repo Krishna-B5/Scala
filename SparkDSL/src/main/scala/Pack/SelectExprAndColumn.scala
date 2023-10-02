@@ -40,6 +40,7 @@ object SelectExprAndColumn {
     // Reading data using selectExpr year and adding status column at the end
     val exprdf = dtdf.selectExpr("id",
                                  "split(tdate,'-')[2] as year",
+                                 "tdate",
                                  "amount",
                                  "category",
                                  "product",

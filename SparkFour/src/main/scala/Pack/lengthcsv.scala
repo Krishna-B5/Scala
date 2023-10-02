@@ -23,7 +23,7 @@ object lengthcsv {
 			println("=====length data=====")
 			println
 			
-			val fildata = data.filter( x => x.length > 200)
+			val fildata = data.filter( x => x.length > 195)
 			fildata.foreach(println)
 			
 			println
@@ -48,7 +48,7 @@ object lengthcsv {
 			concatdata.foreach(println)
 
 			println("====Data Write=====")
-			concatdata.coalesce(1).saveAsTextFile("file:///C:/data/33dir")
+//			concatdata.coalesce(1).saveAsTextFile("file:///C:/data/33dir/US")
     
   }
 }

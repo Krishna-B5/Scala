@@ -18,7 +18,7 @@ object XML1 {
     val spark = SparkSession.builder().getOrCreate()
     import spark.implicits._
     
-    val xmldata = spark.read.format("XML")
+    val xmldata = spark.read.format("xml")
                   .option("rowTag", "book")
                   .load("file:///c:/data/book.xml")
     

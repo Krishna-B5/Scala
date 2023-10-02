@@ -20,6 +20,7 @@ object Avrofile {
  // Reading Avro file   
     val avrodata = spark.read.format("avro").load("file:///c:/data/data.avro")
     avrodata.show()
+    avrodata.printSchema()
     
     avrodata.createOrReplaceTempView("emp") // creating a table
     
